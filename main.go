@@ -16,12 +16,12 @@ type LambdaInput struct {
 }
 
 func handler(ctx context.Context, input LambdaInput) (*events.APIGatewayProxyResponse, error) {
-	ctx = log.MustContextWithTracing(ctx, &log.TracingContext{
+	ctx = log.Must(log.ContextWithTracing(ctx, &log.TracingContext{
 		// EventID: input.EventID,
 		// ExecutionID: input.ExecutionID,
 		RequestID: input.RequestID,
 		TraceID:   input.XRay,
-	})
+	}))
 
 	log.Log(ctx, log.ERROR, "serving API request", map[string]any{
 		"resourceId": input.ResourceID,

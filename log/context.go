@@ -28,12 +28,9 @@ func ContextWithTracing(ctx context.Context, tracing *TracingContext) (context.C
 	return context.WithValue(ctx, tracingContextKey, tracing), nil
 }
 
-// MustContextWithTracing returns a new Context that carries tracing
-// information.
-//
-// Panics if context is already carrying tracing information.
-func MustContextWithTracing(ctx context.Context, tracing *TracingContext) context.Context {
-	ctx, err := ContextWithTracing(ctx, tracing)
+// Must is a helper function to ensure there was no error when calling the
+// ContextWithTracing function.
+func Must(ctx context.Context, err error) context.Context {
 	if err != nil {
 		panic(err)
 	}
