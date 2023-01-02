@@ -25,7 +25,7 @@ import (
 //  1. The given context has an embedded logger, or
 //  2. The global variable [zerolog.DefaultContextLogger] is not nil.
 //
-// If either of these assumptions are false, then zerolog will silently return a DISABLED logger.
+// If both of these assumptions are false, then zerolog will silently return a DISABLED logger.
 //
 // The new logger should be retrieved from the context by using [zerolog.Ctx]
 // (or [log.Ctx] which is an alias).
