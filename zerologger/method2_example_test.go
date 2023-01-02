@@ -26,6 +26,11 @@ func Test_Handler_2_With_Context_Value(t *testing.T) {
 }
 
 func Test_Handler_2_With_Global_Default(t *testing.T) {
+	globalDefault := zerolog.DefaultContextLogger
+	t.Cleanup(func() {
+		zerolog.DefaultContextLogger = globalDefault
+	})
+
 	zerolog.DefaultContextLogger = &log.Logger
 
 	_, err := zerologger.Handler_2(context.Background(), events.APIGatewayProxyRequest{
